@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل تطبيق - سبلاي أوفيس للإدارة الذكية</title>
+
+    <!-- أيقونة مكتب -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='15' y='25' width='70' height='55' rx='12' fill='%23007AFF' opacity='0.9'/%3E%3Crect x='25' y='15' width='50' height='45' rx='8' fill='%23007AFF'/%3E%3Crect x='35' y='35' width='30' height='4' rx='2' fill='white' opacity='0.6'/%3E%3Crect x='35' y='45' width='20' height='4' rx='2' fill='white' opacity='0.6'/%3E%3Ccircle cx='75' cy='75' r='18' fill='%2334C759'/%3E%3Cpath d='M68 75 L73 80 L82 71' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <meta name="google-site-verification" content="7g3uTInjNEsof8zx2Kx7w5spJUizWoORm-6T0ftiA7U" />
+    <meta name="description" content="التطبيق الرسمي لـ سبلاي أوفيس للإدارة الذكية. نظام إداري متطور لإدارة المكاتب والمستودعات والموارد بكفاءة عالية.">
+    <meta name="keywords" content="سبلاي أوفيس, Supply Office, نظام إدارة مكاتب, إدارة ذكية, قصي سوفت, نظام إداري متطور, إدارة المستودعات, إدارة الموارد, برنامج مكاتب">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(160deg, #0c0c1d 0%, #1a1a3e 30%, #16213e 60%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* خلفية زجاجية متحركة */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(88, 86, 214, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-2%, 2%) rotate(1deg); }
+            66% { transform: translate(2%, -1%) rotate(-1deg); }
+        }
+
+        /* دوائر زخرفية خلفية */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-orb-1 {
+            width: 400px; height: 400px;
+            background: rgba(0, 122, 255, 0.12);
+            top: -100px; right: -100px;
+            animation: orb1 15s ease-in-out infinite;
+        }
+        .bg-orb-2 {
+            width: 300px; height: 300px;
+            background: rgba(88, 86, 214, 0.1);
+            bottom: -80px; left: -80px;
+            animation: orb2 18s ease-in-out infinite;
+        }
+        .bg-orb-3 {
+            width: 200px; height: 200px;
+            background: rgba(0, 210, 255, 0.08);
+            top: 40%; left: 30%;
+            animation: orb3 12s ease-in-out infinite;
+        }
+
+        @keyframes orb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+        @keyframes orb2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.15); }
+        }
+        @keyframes orb3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, -30px) scale(0.9); }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            max-width: 460px;
+            width: 100%;
+            padding: 45px 35px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* تأثير لمعان علوي */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .logo-wrap {
+            position: relative;
+            margin: 0 auto 20px;
+            width: 100px; height: 100px;
+        }
+
+        .logo {
+            width: 100px; height: 100px;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.9) 0%, rgba(88, 86, 214, 0.9) 100%);
+            border-radius: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                0 12px 40px rgba(0, 122, 255, 0.3),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            border-radius: 28px 28px 0 0;
+        }
+
+        .logo svg {
+            width: 44px; height: 44px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* حلقة متحركة حول اللوجو */
+        .logo-ring {
+            position: absolute;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            border-radius: 34px;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, rgba(0,122,255,0.3), rgba(88,86,214,0.3)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        h1 { 
+            font-size: 26px; 
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #a5c8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .sub { 
+            color: rgba(255, 255, 255, 0.55); 
+            font-size: 14px; 
+            margin-bottom: 8px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 122, 255, 0.15);
+            border: 1px solid rgba(0, 122, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #64b5f6;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .version-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: #34c759;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #34c759;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .dev-info {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            margin-bottom: 28px;
+        }
+
+        .dev-info a {
+            color: rgba(165, 200, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .dev-info a:hover { color: #a5c8ff; }
+
+        .btn {
+            position: relative;
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            color: white; 
+            border: none; 
+            width: 100%;
+            padding: 18px; 
+            font-size: 18px; 
+            border-radius: 18px;
+            cursor: pointer; 
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700; 
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 8px 32px rgba(0, 122, 255, 0.35),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover { 
+            background: linear-gradient(135deg, #1a8cff 0%, #6b69e0 100%);
+            transform: translateY(-2px) scale(1.01); 
+            box-shadow: 
+                0 12px 40px rgba(0, 122, 255, 0.45),
+                0 0 0 1px rgba(255,255,255,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.25);
+        }
+        .btn:hover::before { left: 100%; }
+
+        .btn:active {
+            transform: translateY(0) scale(0.99);
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+        }
+
+        .btn:disabled { 
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: rgba(255, 255, 255, 0.3);
+            transform: none; 
+            cursor: not-allowed; 
+            box-shadow: none;
+        }
+
+        #info { 
+            margin-top: 18px; 
+            font-size: 14px; 
+            color: rgba(255, 255, 255, 0.7); 
+            line-height: 1.8;
+            min-height: 24px;
+        }
+
+        .loader {
+            display: none; 
+            width: 36px; height: 36px;
+            margin: 18px auto 0; 
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #007AFF; 
+            border-right: 3px solid #5856D6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+
+        .footer { 
+            margin-top: 28px; 
+            font-size: 11px; 
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        .footer a {
+            color: rgba(165, 200, 255, 0.5);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .footer a:hover { color: #a5c8ff; }
+
+        .badge {
+            display: inline-flex; 
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px; 
+            border-radius: 24px;
+            font-size: 12px; 
+            color: rgba(255, 255, 255, 0.6); 
+            margin-top: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-weight: 500;
+        }
+
+        .warn { color: #ff9f43; }
+        .ok { color: #34c759; font-weight: 600; }
+        .debug { 
+            font-size: 10px; 
+            color: rgba(255, 255, 255, 0.2); 
+            margin-top: 10px; 
+            word-break: break-all;
+            font-family: 'SF Mono', monospace;
+        }
+
+        /* شريط مميزات */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0 10px;
+            flex-wrap: wrap;
+        }
+
+        .feature-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+
+        .feature-chip svg {
+            width: 14px; height: 14px;
+            fill: rgba(0, 122, 255, 0.7);
+        }
+
+        /* تأثير دخول */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card > * {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .card > *:nth-child(1) { animation-delay: 0.1s; }
+        .card > *:nth-child(2) { animation-delay: 0.2s; }
+        .card > *:nth-child(3) { animation-delay: 0.3s; }
+        .card > *:nth-child(4) { animation-delay: 0.35s; }
+        .card > *:nth-child(5) { animation-delay: 0.4s; }
+        .card > *:nth-child(6) { animation-delay: 0.45s; }
+        .card > *:nth-child(7) { animation-delay: 0.5s; }
+        .card > *:nth-child(8) { animation-delay: 0.55s; }
+        .card > *:nth-child(9) { animation-delay: 0.6s; }
+        .card > *:nth-child(10) { animation-delay: 0.65s; }
+        .card > *:nth-child(11) { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <div class="card">
+        <div class="logo-wrap">
+            <div class="logo-ring"></div>
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+            </div>
+        </div>
+
+        <h1>سبلاي أوفيس للإدارة الذكية</h1>
+        <p class="sub">نظام إداري متطور لإدارة المكاتب والمستودعات والموارد بكفاءة عالية</p>
+
+        <div class="version-badge">الإصدار الحالي: 175</div>
+
+        <div class="features">
+            <div class="feature-chip">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                إدارة المخزون
+            </div>
+            <div class="feature-chip">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                تقارير ذكية
+            </div>
+            <div class="feature-chip">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                سحابي آمن
+            </div>
+        </div>
+
+        <p class="dev-info">برمجة وتطوير وتصميم <a href="https://qusaisoft.top" target="_blank">قصي سوفت</a> 730965157</p>
+
+        <button class="btn" id="downloadBtn">📲 تحميل التطبيق الآن</button>
+
+        <div id="info"></div>
+        <div class="loader" id="loader"></div>
+        <div id="badge" class="badge"></div>
+        <div class="debug" id="debug"></div>
+
+        <div class="footer">جميع الحقوق محفوظة لدى <a href="https://qusaisoft.top" target="_blank">قصي سوفت</a> © 2026</div>
+    </div>
+
+    <script>
+        async function getArchitecture() {
+            var ua = navigator.userAgent.toLowerCase();
+            var platform = (navigator.platform || '').toLowerCase();
+            var debugParts = [];
+
+            if (platform) {
+                debugParts.push('platform=' + navigator.platform);
+                if (platform.indexOf('armv8') !== -1 || platform.indexOf('aarch64') !== -1) {
+                    return { apk: 'arm64-v8a', name: '64 بت', method: 'navigator.platform', debug: debugParts };
+                }
+                if (platform.indexOf('armv7') !== -1) {
+                    return { apk: 'armeabi-v7a', name: '32 بت', method: 'navigator.platform', debug: debugParts };
+                }
+            }
+
+            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+                try {
+                    var vals = await navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness', 'model']);
+                    debugParts.push('uaData=' + JSON.stringify(vals));
+
+                    if (vals.bitness) {
+                        var arch = (vals.architecture || '').toLowerCase();
+                        var bits = vals.bitness;
+                        if ((arch === 'arm' || arch === 'aarch64') && bits === '64') {
+                            return { apk: 'arm64-v8a', name: '64 بت', method: 'UAData', debug: debugParts };
+                        }
+                        if (arch === 'arm' && bits === '32') {
+                            return { apk: 'armeabi-v7a', name: '32 بت', method: 'UAData', debug: debugParts };
+                        }
+                    }
+                } catch (e) {
+                    debugParts.push('uaDataErr=' + e.message);
+                }
+            }
+
+            if (ua.indexOf('aarch64') !== -1 || ua.indexOf('arm64') !== -1) {
+                return { apk: 'arm64-v8a', name: '64 بت', method: 'UserAgent', debug: debugParts };
+            }
+            if (ua.indexOf('armv7') !== -1 || ua.indexOf('armv7l') !== -1) {
+                return { apk: 'armeabi-v7a', name: '32 بت', method: 'UserAgent', debug: debugParts };
+            }
+
+            var modelMatch = ua.match(/\(([^)]+)\)/);
+            if (modelMatch) {
+                var m = modelMatch[1].toLowerCase();
+                debugParts.push('model=' + m);
+
+                var samsung64 = /sm-g95|sm-g96|sm-g97|sm-g98|sm-g99|sm-n95|sm-n96|sm-n97|sm-n98|sm-f90|sm-f91|sm-a73|sm-a53|sm-a54|sm-a34|sm-s90|sm-m54|sm-m34|sm-m14/;
+                var xiaomi64 = /mi 9|mi 10|mi 11|mi 12|mi 13|redmi note 9|redmi note 1[0-9]|redmi 1[0-9]|poco f[2-9]|poco x[3-9]|poco m[3-9]/;
+                var other64 = /pixel [3-9]|pixel [a-z]|oneplus [6-9]|oneplus 1[0-9]|realme gt|realme [0-9]+pro|oppo r[1-9][0-9]|vivo v[2-9][0-9]/;
+                var huawei64 = /huawei p[3-9][0-9]|huawei mate [3-9][0-9]|honor [2-9][0-9]|nova [5-9]/;
+
+                if (samsung64.test(m) || xiaomi64.test(m) || other64.test(m) || huawei64.test(m)) {
+                    return { apk: 'arm64-v8a', name: '64 بت', method: 'طراز الجهاز', debug: debugParts };
+                }
+            }
+
+            var androidVer = ua.match(/android\s+(\d+)/);
+            if (androidVer) {
+                var v = parseInt(androidVer[1]);
+                debugParts.push('android=' + v);
+                if (v >= 12) {
+                    return { apk: 'arm64-v8a', name: '64 بت', method: 'Android 12+', debug: debugParts };
+                }
+            }
+
+            return { 
+                apk: 'armeabi-v7a', 
+                name: '32 بت (عام)', 
+                method: 'افتراضي آمن',
+                note: 'النسخة 32 بت تعمل على جميع الأجهزة بما فيها 64 بت',
+                debug: debugParts
+            };
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', async function() {
+            var btn = document.getElementById('downloadBtn');
+            var info = document.getElementById('info');
+            var loader = document.getElementById('loader');
+            var badge = document.getElementById('badge');
+            var debug = document.getElementById('debug');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ جاري التعرف...';
+            loader.style.display = 'block';
+            info.innerHTML = '';
+            badge.textContent = '';
+            debug.textContent = '';
+
+            var result = await getArchitecture();
+
+            badge.textContent = 'جهازك: ' + result.name + ' | طريقة: ' + result.method;
+
+            var msg = '<span class="ok">✓ تم التعرف</span>';
+            if (result.note) msg += '<br><span class="warn">' + result.note + '</span>';
+            info.innerHTML = msg;
+            debug.textContent = result.debug.join(' | ');
+
+            btn.textContent = '⬇️ جاري تحميل ' + result.apk + '...';
+
+            var url = 'https://github.com/QUSAI-ALPRINS/amdad4-download/releases/download/v175.0.0+175/app-' + result.apk + '.apk';
+            window.location.href = url;
+
+            setTimeout(function() {
+                btn.disabled = false;
+                btn.textContent = '📲 تحميل التطبيق الآن';
+                loader.style.display = 'none';
+                info.innerHTML += '<br><br>إذا لم يبدأ: <a href="' + url + '" style="color:#64b5f6;font-weight:bold;">اضغط هنا</a>';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
